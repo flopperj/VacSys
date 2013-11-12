@@ -2,10 +2,8 @@
  * Represents a patient with their name, age, zip and priority value
  * 
  * @author jamesarama
- * 
- * @param <T>
  */
-public class Patient<T> implements Comparable<Patient<T>> {
+public class Patient implements Comparable<Patient> {
 	/**
 	 * @property String name - Name of patient
 	 */
@@ -110,16 +108,32 @@ public class Patient<T> implements Comparable<Patient<T>> {
 	}
 
 	/**
+	 * Return string representation of patient with all their info
+	 * 
+	 * @return String
+	 */
+	public String toString() {
+		return "{ name: " + this.name + ", age: " + this.age + ", zipcode: "
+				+ this.zip + ", priority: " + this.priority + "}";
+	}
+
+	/**
 	 * Our comparator to compare other patients based on their priority
 	 * 
-	 * @param Patient patient
+	 * @param Patient
+	 *            patient
 	 * @return int 1|0|-1
 	 */
-	public int compareTo(Patient<T> patient) {
+	public int compareTo(Patient patient) {
 		if (this.priority > patient.priority)
 			return 1;
 		else if (this.priority < patient.priority)
 			return -1;
+		else if (this.priority == patient.priority
+				&& this.name == patient.getName()
+				&& this.age == patient.getAge() && this.zip == patient.getZip())
+			return 0;
+
 		return 0;
 	}
 
