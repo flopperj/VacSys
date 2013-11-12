@@ -113,8 +113,8 @@ public class Patient implements Comparable<Patient> {
 	 * @return String
 	 */
 	public String toString() {
-		return "{ name: " + this.name + ", age: " + this.age + ", zipcode: "
-				+ this.zip + ", priority: " + this.priority + "}";
+		return this.name + ", " + this.age + ", " + this.zip + ", "
+				+ this.priority;
 	}
 
 	/**

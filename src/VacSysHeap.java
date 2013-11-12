@@ -27,6 +27,8 @@ public class VacSysHeap implements VacSysPriorityQueue {
 
 			// add our queued item
 			temp.add(this.getSize(), patient);
+			
+			this.clear();
 
 			// set our temp as the new heap
 			this.heap = temp;
@@ -48,6 +50,9 @@ public class VacSysHeap implements VacSysPriorityQueue {
 				if (patientInLine != patientToDequeue)
 					temp.add(patientInLine);
 			}
+			
+			this.clear();
+			this.heap = temp;
 
 		} else
 			return null;

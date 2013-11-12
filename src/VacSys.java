@@ -1,10 +1,15 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class VacSys {
-	public VacSysHeap system;
+	public VacSysHeap queue;
 	private int tpop;
 	private ArrayList<String> zipcodes;
 
@@ -29,7 +34,7 @@ public class VacSys {
 	 * Default Constructor Creates a system with an empty priority queue
 	 */
 	public VacSys() {
-		system = new VacSysHeap();
+		queue = new VacSysHeap();
 		tpop = 0;
 		zipcodes = new ArrayList<String>();
 	}
@@ -41,7 +46,7 @@ public class VacSys {
 	 * @param filename
 	 */
 	public VacSys(String filename) throws IOException {
-		system = new VacSysHeap();
+		queue = new VacSysHeap();
 		tpop = 0;
 		zipcodes = new ArrayList<String>();
 
@@ -54,6 +59,7 @@ public class VacSys {
 
 			// Extract data from file
 			while ((line = buffer.readLine()) != null) {
+				
 				String[] information = line.split(",");
 
 				// String name = information[0];
@@ -74,7 +80,6 @@ public class VacSys {
 				this.insert(name, age, zip);
 			}
 		} catch (Exception e) {
-//			throw new IOException("Could not access specified file!");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -98,8 +103,11 @@ public class VacSys {
 		int zpop = this.getZipPopulation(zip);
 		patient.setPriority(zpop, this.tpop);
 
-		this.system.enqueue(patient);
-
+		this.queue.enqueue(patient);
+		
+		// sort our heap
+		Collections.sort(this.queue.getHeap());
+		
 		return true;
 	}
 
@@ -109,7 +117,8 @@ public class VacSys {
 	 * @return
 	 */
 	public String remove() {
-		return null;
+		Patient patient = this.queue.dequeue();
+		return patient.toString();
 	}
 
 	/**
@@ -120,6 +129,23 @@ public class VacSys {
 	 * @return
 	 */
 	public boolean remove(int num, String filename) {
+		try{
+			File file = new File(filename);
+			if(!file.exists())
+				file.createNewFile();
+			
+			
+			FileWriter writer = new FileWriter(file.getAbsoluteFile(), true);			
+			for (int i = 0; i < num; i++){
+				String patientInfo = this.remove();
+				writer.write(patientInfo + "\n");
+				
+				System.out.println("Removed: " + patientInfo);
+			}
+			writer.close();
+			
+		}catch(Exception e){
+		}
 		return false;
 	}
 }

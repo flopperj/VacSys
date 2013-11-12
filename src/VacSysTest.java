@@ -6,11 +6,16 @@ public class VacSysTest {
 		VacSys v;
 		try {
 			v = new VacSys("src/testdata/test1K.csv");
-
-			for (Patient p : v.system.getHeap()) {
-				System.out.println(p);
-				System.out.println("testomg!");
-			}
+			
+			System.out.println("Testing the removal of first 10 requests: \n");
+			v.remove(10, "src/testdata/test1K-results.csv");
+			
+			System.out.println("\n\nTesting the removal of second 10 requests: \n");
+			v.remove(10, "src/testdata/test1K-results.csv");
+			
+			System.out.println("\n\nTesting the removal of third 10 requests: \n");
+			v.remove(10, "src/testdata/test1K-results.csv");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
