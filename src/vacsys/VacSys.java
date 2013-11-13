@@ -138,9 +138,12 @@ public class VacSys {
 			// Prepare our patients so that we can add them to the priority
 			// queue
 			for (int priority : this.sortedPatients.keySet()) {
-				ArrayList<Patient> patients = (ArrayList<Patient>) sortedPatients
+				ArrayList<Patient> patientsQueue = (ArrayList<Patient>) sortedPatients
 						.get(priority);
-				this.priorityHeap.enqueue(patients);
+
+				// queue in individual patient from patients queue
+				for (Patient patient : patientsQueue)
+					this.priorityHeap.enqueuePatient(patient);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
