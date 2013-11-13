@@ -1,81 +1,136 @@
 package vacsys;
+
 import java.util.ArrayList;
 
-public class VacSysHeap implements VacSysPriorityQueue {
+/**
+ * Implementation of VacSys Heap
+ * 
+ * @author jamesarama
+ * 
+ * @param <T>
+ */
+public class VacSysHeap<T> implements VacSysPriorityQueue<T> {
 
-	private ArrayList<Patient> heap;
+	/**
+	 * @private
+	 * @property ArrayList<T> heap
+	 */
+	private ArrayList<T> heap;
 
+	/**
+	 * Default constructor
+	 */
 	public VacSysHeap() {
-		this.heap = new ArrayList<Patient>(0);
+		this.heap = new ArrayList<T>();
 	}
 
-	public ArrayList<Patient> getHeap() {
+	/**
+	 * Gets our heap
+	 * 
+	 * @return heap
+	 */
+	public ArrayList<T> getHeap() {
 		return this.heap;
 	}
 
-	@Override
-	public void enqueue(Patient patient) {
+	/**
+	 * Re-builds a heap of array lists containing patients
+	 * 
+	 * @private
+	 * @param index
+	 */
+	@SuppressWarnings("unchecked")
+	private void reBuildHeap(int index) {
+		ArrayList<T> currentHeap = (ArrayList<T>) this.getHeap().get(index);
+		ArrayList<T> parentHeap = (ArrayList<T>) this.getHeap().get(index - 1);
 
-		ArrayList<Patient> temp;
+		int compare = ((Patient) currentHeap.get(0))
+				.compareTo((Patient) parentHeap.get(0));
 
-		if (patient != null) {
-			temp = new ArrayList<Patient>(this.getSize() + 1);
+		if (compare > 0) {
+			this.heap.set(index, (T) parentHeap);
+			this.heap.set(index - 1, (T) currentHeap);
 
-			// rebuild the heap
-			for (Patient patientInLine : this.getHeap()) {
-				temp.add(patientInLine);
+			if (index - 1 > 0)
+				reBuildHeap(index - 1);
+		} else {
+			if (compare == 0) {
+				((ArrayList<T>) this.heap.get(index - 1)).addAll(currentHeap);
+				this.heap.remove(index);
 			}
-
-			// add our queued item
-			temp.add(this.getSize(), patient);
-			
-			this.clear();
-
-			// set our temp as the new heap
-			this.heap = temp;
 		}
 
 	}
 
+	/**
+	 * Queue's in a queue of patients
+	 * 
+	 * @public
+	 * @param patient
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Patient dequeue() {
+	public void enqueue(ArrayList<T> patients) {
+		this.heap.add((T) patients);
+	}
 
-		// patient to dequeue
-		Patient patientToDequeue = this.heap.get(0);
-		ArrayList<Patient> temp;
+	/**
+	 * De-queues the first patient from our heap
+	 * 
+	 * @public
+	 * @return patient
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public T dequeue() {
 
-		if (patientToDequeue != null) {
-			temp = new ArrayList<Patient>(this.getSize() - 1);
-
-			for (Patient patientInLine : this.getHeap()) {
-				if (patientInLine != patientToDequeue)
-					temp.add(patientInLine);
-			}
-			
-			this.clear();
-			this.heap = temp;
-
-		} else
-			return null;
+		// patients to dequeue
+		ArrayList<T> patientsToDequeueFrom = (ArrayList<T>) this.heap.get(0);
+		T patientToDequeue = patientsToDequeueFrom.remove(0);
+		reBuildHeap(heap.size() - 1);
 
 		return patientToDequeue;
 	}
 
+	/**
+	 * Checks whether our heap is empty
+	 * 
+	 * @public
+	 * @return true|false
+	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return this.getSize() == 0;
 	}
 
+	/**
+	 * Gets the size of our heap
+	 * 
+	 * @public
+	 */
+	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return this.heap.size();
+		
+		int population = 0;
+		
+		for(T queue : this.getHeap())
+		{
+			for(Patient patient: (ArrayList<Patient>)queue)
+				population++;
+		}
+		
+		return population;
 	}
 
+	/**
+	 * Clear's our heap
+	 * 
+	 * @public
+	 */
 	@Override
 	public void clear() {
-		this.heap = new ArrayList<Patient>(0);
+		this.heap = new ArrayList<T>(0);
 	}
 
 }

@@ -1,33 +1,51 @@
 package vacsys;
+
+import java.util.ArrayList;
+
 /**
  * Interface for our VacSysHeap
+ * 
  * @author jamesarama
- *
+ * 
  * @param <T>
  */
-public interface VacSysPriorityQueue {	
+public interface VacSysPriorityQueue<T> {
 	/**
-	 * Queue's in a patient
-	 * @param Patient patient
+	 * Queue's in a queue of patients
+	 * 
+	 * @public
+	 * @param patient
 	 */
-	public abstract void enqueue(Patient patient);
+	public void enqueue(ArrayList<T> patients);
+
 	/**
 	 * De-queues the first patient from our heap
-	 * @return Patient patient
+	 * 
+	 * @public
+	 * @return patient
 	 */
-	public abstract Patient dequeue();
+	public abstract T dequeue();
+
 	/**
 	 * Checks whether our heap is empty
-	 * @return boolean true|false
+	 * 
+	 * @public
+	 * @return true|false
 	 */
 	public abstract boolean isEmpty();
+
 	/**
 	 * Clear's our heap
+	 * 
+	 * @public
 	 */
 	public abstract void clear();
+
 	/**
 	 * Gets the size of our queue
-	 * @return int size
+	 * 
+	 * @public
+	 * @return size
 	 */
 	public abstract int getSize();
 

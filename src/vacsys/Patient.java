@@ -1,4 +1,5 @@
 package vacsys;
+
 /**
  * Represents a patient with their name, age, zip and priority value
  * 
@@ -34,8 +35,8 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * sets the name of our patient
 	 * 
-	 * @param String
-	 *            _name
+	 * @public
+	 * @param _name
 	 */
 	public void setName(String _name) {
 		this.name = _name;
@@ -44,6 +45,7 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Sets the age of our patient
 	 * 
+	 * @public
 	 * @param _age
 	 */
 	public void setAge(int _age) {
@@ -53,8 +55,8 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Sets the zip code of our patient
 	 * 
-	 * @param String
-	 *            _zip
+	 * @public
+	 * @param _zip
 	 */
 	public void setZip(String _zip) {
 		this.zip = _zip;
@@ -63,9 +65,12 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Sets the priority value of our patient
 	 * 
-	 * @param int zpop - the population of patients in the system in the zipcode
-	 *        of request
-	 * @param int tpop - the total population of patients in the system
+	 * @public
+	 * @param zpop
+	 *            - the population of patients in the system in the zipcode of
+	 *            request
+	 * @param tpop
+	 *            - the total population of patients in the system
 	 */
 	public void setPriority(int zpop, int tpop) {
 		this.priority = (int) (Math.abs(35 - this.age) / 5)
@@ -75,6 +80,7 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Gets patient's name
 	 * 
+	 * @public
 	 * @return String name
 	 */
 	public String getName() {
@@ -84,7 +90,8 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Gets patient's age
 	 * 
-	 * @return int age
+	 * @public
+	 * @return age
 	 */
 	public int getAge() {
 		return this.age;
@@ -93,7 +100,8 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Gets patient's zip code
 	 * 
-	 * @return String zip
+	 * @public
+	 * @return zip
 	 */
 	public String getZip() {
 		return this.zip;
@@ -102,7 +110,8 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Gets patients priority value
 	 * 
-	 * @return int priority
+	 * @public
+	 * @return priority
 	 */
 	public int getPriority() {
 		return this.priority;
@@ -111,6 +120,7 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Return string representation of patient with all their info
 	 * 
+	 * @public
 	 * @return String
 	 */
 	public String toString() {
@@ -121,9 +131,9 @@ public class Patient implements Comparable<Patient> {
 	/**
 	 * Our comparator to compare other patients based on their priority
 	 * 
-	 * @param Patient
-	 *            patient
-	 * @return int 1|0|-1
+	 * @public
+	 * @param patient
+	 * @return 1|0|-1
 	 */
 	public int compareTo(Patient patient) {
 		if (this.priority > patient.priority)
