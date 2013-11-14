@@ -1,8 +1,8 @@
 VacSys
 ======
 
-## SCENARIO
------------
+##### SCENARIO
+--------------
 In this assignment we will be developing a vaccination allocation system called VacSys. This 
 program will take in requests for vaccinations, either in batch format in a CSV ﬁle or as an individual 
 request. The system will calculate a priority value for each request, and store the request in a priority 

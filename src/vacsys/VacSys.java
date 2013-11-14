@@ -142,8 +142,15 @@ public class VacSys {
 						.get(priority);
 
 				// queue in individual patient from patients queue
-				for (Patient patient : patientsQueue)
+				for (Patient patient : patientsQueue) {
+					int zipcodePopulation = this.getZipcodePopulation(patient
+							.getZip());
+
+					// reset patient's priority based on total population
+					patient.setPriority(zipcodePopulation, this.totalPopulation);
+
 					this.priorityHeap.enqueuePatient(patient);
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
