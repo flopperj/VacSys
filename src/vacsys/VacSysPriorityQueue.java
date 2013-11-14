@@ -14,12 +14,12 @@ public interface VacSysPriorityQueue<T> {
 	 * Queues in a queue of patients
 	 * 
 	 * @public
-	 * @param patient
+	 * @param patients
 	 */
-	public abstract void enqueue(ArrayList<T> patients);
+	public abstract void enqueuePatients(ArrayList<T> patients);
 
 	/**
-	 * Queues in individual patient
+	 * Queues in an individual patient
 	 * 
 	 * @public
 	 * @param patient
