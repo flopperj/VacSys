@@ -82,32 +82,21 @@ public class VacSysHeap<T> implements VacSysPriorityQueue<T> {
 	}
 
 	/**
-	 * Queues in a queue of patients to the heap
-	 * 
-	 * @public
-	 * @param patients
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void enqueuePatients(ArrayList<T> patients) {
-		this.heap.add((T) patients);
-	}
-
-	/**
 	 * Queues in an individual patient
 	 * 
 	 * @public
 	 * @param patient
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public void enqueuePatient(T patient) {
+	public void enqueue(T patient) {
 
 		// Initialize a single patient queue
 		ArrayList<T> newPatientQueue = new ArrayList<T>();
 		newPatientQueue.add(patient);
 
 		// enqueue the new queue
-		this.enqueuePatients(newPatientQueue);
+		this.heap.add((T)newPatientQueue);
 
 		// rebuild our heap
 		if (this.heap.size() > 1)

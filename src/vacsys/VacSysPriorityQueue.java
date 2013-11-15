@@ -1,7 +1,5 @@
 package vacsys;
 
-import java.util.ArrayList;
-
 /**
  * Interface for our VacSysHeap
  * 
@@ -11,20 +9,12 @@ import java.util.ArrayList;
  */
 public interface VacSysPriorityQueue<T> {
 	/**
-	 * Queues in a queue of patients
-	 * 
-	 * @public
-	 * @param patients
-	 */
-	public abstract void enqueuePatients(ArrayList<T> patients);
-
-	/**
 	 * Queues in an individual patient
 	 * 
 	 * @public
 	 * @param patient
 	 */
-	public abstract void enqueuePatient(T patient);
+	public abstract void enqueue(T patient);
 
 	/**
 	 * De-queues the first patient from our heap

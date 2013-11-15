@@ -108,14 +108,6 @@ public class VacSys {
 				// add zip code to zipcodes list. This will be helpful when
 				// determining total population at a given zipcode
 				zipcodes.add(information[2]);
-				int zipcodePopulation = this
-						.getZipcodePopulation(information[2]);
-				totalPopulation++;
-
-				// set patient's priority based on zipcode population and total
-				// population
-				patientInLine.setPriority(zipcodePopulation,
-						this.totalPopulation);
 
 				int tempPriority = patientInLine.getPriority();
 
@@ -133,7 +125,7 @@ public class VacSys {
 
 			// Set total population to the size of the zipcodes list since it
 			// contains everyone's zipcode
-			totalPopulation = zipcodes.size();
+			this.totalPopulation = zipcodes.size();
 
 			// Prepare our patients so that we can add them to the priority
 			// queue
@@ -144,12 +136,12 @@ public class VacSys {
 				// queue in individual patient from patients queue
 				for (Patient patient : patientsQueue) {
 					int zipcodePopulation = this.getZipcodePopulation(patient
-							.getZip());
+							.getZipCode());
 
 					// reset patient's priority based on total population
 					patient.setPriority(zipcodePopulation, this.totalPopulation);
 
-					this.priorityHeap.enqueuePatient(patient);
+					this.priorityHeap.enqueue(patient);
 				}
 			}
 		} catch (Exception e) {
@@ -193,7 +185,7 @@ public class VacSys {
 		this.sortedPatients.get(newPatient.getPriority()).add(newPatient);
 
 		// Enqueue new patient to our priority heap
-		this.priorityHeap.enqueuePatient(newPatient);
+		this.priorityHeap.enqueue(newPatient);
 
 		return true;
 	}
@@ -205,7 +197,8 @@ public class VacSys {
 	 */
 	public String remove() {
 		Patient patient = (Patient) this.priorityHeap.dequeue();
-		return patient.toString();
+		return patient.getName() + "," + patient.getAge() + ","
+				+ patient.getZipCode();
 	}
 
 	/**
@@ -241,7 +234,12 @@ public class VacSys {
 				System.out.println("Removed: " + patientInfo);
 				System.out.println("Size: " + this.priorityHeap.getSize());
 			}
+
 			writer.close();
+
+			// return true for a successful deletion
+			if (num > 0)
+				return true;
 
 		} catch (Exception e) {
 			e.printStackTrace();

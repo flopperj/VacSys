@@ -30,6 +30,7 @@ public class Patient implements Comparable<Patient> {
 		this.setAge(0);
 		this.setName("");
 		this.setZip("");
+		this.priority = 0;
 	}
 
 	/**
@@ -103,7 +104,7 @@ public class Patient implements Comparable<Patient> {
 	 * @public
 	 * @return zip
 	 */
-	public String getZip() {
+	public String getZipCode() {
 		return this.zip;
 	}
 
@@ -124,8 +125,8 @@ public class Patient implements Comparable<Patient> {
 	 * @return String
 	 */
 	public String toString() {
-		return this.name + ", " + this.age + ", " + this.zip + ", "
-				+ this.priority;
+		return "{ Name: " + this.name + ", Age: " + this.age + ", ZipCode: "
+				+ this.zip + ", Priority: " + this.priority + " }";
 	}
 
 	/**
@@ -142,7 +143,7 @@ public class Patient implements Comparable<Patient> {
 			return -1;
 		else if (this.priority == patient.priority
 				&& this.name == patient.getName()
-				&& this.age == patient.getAge() && this.zip == patient.getZip())
+				&& this.age == patient.getAge() && this.zip == patient.getZipCode())
 			return 0;
 
 		return 0;

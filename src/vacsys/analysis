@@ -1,4 +1,0 @@
-Time Analysis of VacSys functions:
-	insert: O(nlogn)
-	String remove: O(n)
-	boolean remove: O(nlogn)

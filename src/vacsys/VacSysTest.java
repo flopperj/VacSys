@@ -6,7 +6,7 @@ public class VacSysTest {
 	public static void main(String[] args) {
 		VacSys v;
 		try {
-			v = new VacSys("src/testdata/test1K.csv");
+			v = new VacSys("src/testdata/test10K.csv");
 			
 			// Testing removal of requests
 			//=============================
